@@ -119,6 +119,6 @@ class MyApp extends StatelessWidget {
 EOL
 
 # Open the project in Visual Studio Code
-#code .
+code .
 
 echo "Flutter project $PROJECT_NAME has been set up successfully."
