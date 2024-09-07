@@ -15,11 +15,18 @@ flutter create $PROJECT_NAME
 cd $PROJECT_NAME
 
 # Create the additional directory structure
-mkdir -p lib/src/screens
-mkdir -p lib/src/widgets
+mkdir -p lib/src/constants
 mkdir -p lib/src/models
+mkdir -p lib/src/screens
 mkdir -p lib/src/services
 mkdir -p lib/src/utils
+mkdir -p lib/src/widgets
+
+# Create constants.dart
+cat <<EOL > lib/src/constants/constants.dart
+import 'package:flutter/material.dart';
+
+EOL
 
 # Create home_screen.dart
 cat <<EOL > lib/src/screens/home_screen.dart
@@ -88,11 +95,6 @@ class ApiService {
 }
 EOL
 
-# Create constants.dart
-cat <<EOL > lib/src/utils/constants.dart
-const String appTitle = 'My Flutter App';
-EOL
-
 # Update main.dart to use HomeScreen
 cat <<EOL > lib/main.dart
 import 'package:flutter/material.dart';
@@ -117,6 +119,6 @@ class MyApp extends StatelessWidget {
 EOL
 
 # Open the project in Visual Studio Code
-code .
+#code .
 
 echo "Flutter project $PROJECT_NAME has been set up successfully."
