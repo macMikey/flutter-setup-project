@@ -15,18 +15,67 @@ flutter create $PROJECT_NAME
 cd $PROJECT_NAME
 
 # Create the additional directory structure
+mkdir -p assets/data
+mkdir -p assets/fonts
+mkdir -p assets/icons
+mkdir -p assets/images
+
+mkdir -p lib/src/config
 mkdir -p lib/src/constants
 mkdir -p lib/src/models
+mkdir -p lib/src/providers
 mkdir -p lib/src/screens
 mkdir -p lib/src/services
 mkdir -p lib/src/utils
 mkdir -p lib/src/widgets
+
+
+# Update main.dart to use HomeScreen
+cat <<EOL > lib/main.dart
+import 'package:flutter/material.dart';
+import 'src/screens/home_screen.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'My Flutter App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: HomeScreen(),
+    );
+  }
+}
+EOL
+
+
+# config.dart
+cat <<EOL > lib/src/constants/constants.dart
+EOL
+
 
 # Create constants.dart
 cat <<EOL > lib/src/constants/constants.dart
 import 'package:flutter/material.dart';
 
 EOL
+
+
+# Create data_model.dart
+cat <<EOL > lib/src/models/data_model.dart
+class DataModel {
+  final String id;
+  final String name;
+
+  DataModel({required this.id, required this.name});
+}
+EOL
+
 
 # Create home_screen.dart
 cat <<EOL > lib/src/screens/home_screen.dart
@@ -52,6 +101,19 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 EOL
 
+
+# Create api_service.dart
+cat <<EOL > lib/src/services/api_service.dart
+class ApiService {
+  Future<String> fetchData() async {
+    // Simulate network request
+    await Future.delayed(Duration(seconds: 2));
+    return 'Fetched Data';
+  }
+}
+EOL
+
+
 # Create custom_widget.dart
 cat <<EOL > lib/src/widgets/custom_widget.dart
 import 'package:flutter/material.dart';
@@ -74,51 +136,8 @@ class CustomWidget extends StatelessWidget {
 }
 EOL
 
-# Create data_model.dart
-cat <<EOL > lib/src/models/data_model.dart
-class DataModel {
-  final String id;
-  final String name;
 
-  DataModel({required this.id, required this.name});
-}
-EOL
 
-# Create api_service.dart
-cat <<EOL > lib/src/services/api_service.dart
-class ApiService {
-  Future<String> fetchData() async {
-    // Simulate network request
-    await Future.delayed(Duration(seconds: 2));
-    return 'Fetched Data';
-  }
-}
-EOL
-
-# Update main.dart to use HomeScreen
-cat <<EOL > lib/main.dart
-import 'package:flutter/material.dart';
-import 'src/screens/home_screen.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My Flutter App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: HomeScreen(),
-    );
-  }
-}
-EOL
-
-# Open the project in Visual Studio Code
+# Open the project in IDE
 code .
-
 echo "Flutter project $PROJECT_NAME has been set up successfully."
